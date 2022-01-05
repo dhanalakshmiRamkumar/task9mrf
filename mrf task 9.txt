@@ -1,0 +1,57 @@
+
+fetch('https://restcountries.com/v3.1/all')
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let countries = data;
+      console.log('countries', countries)
+      // 1. filter based on region or continents - asia
+      let asiaCOuntries = countries.filter(country => country.region === 'Asia')
+      console.log('asia countries', asiaCOuntries)
+
+      // 2. less that 2lakhs
+      let population = countries.filter(country => country.population < 200000)
+      console.log('countries with less that 2lakh population', population)
+
+      //3. use foreach loop 
+      countries.forEach((country) => {
+        console.log("Name :", country.name.common)
+        console.log("Capital :", country.capital && country.capital[0])
+        console.log("Flag :", country.flag && country.flag[0])
+      });
+
+      // 5. use filter to get currencies using US dollar
+      let filtered = countries.filter(function (country) {
+        return country.currencies?.hasOwnProperty('USD')
+      });
+      console.log(filtered)
+
+      // 4.
+      const reducer = (accumulator, item) => {
+        return accumulator + item.population;
+      };
+
+      const total = countries.reduce(reducer, 0)
+      console.log('total population', total)
+    })
+	
+	answer:
+	Name : Cape Verde
+script.js:137 Capital : Praia
+script.js:138 Flag : �
+script.js:136 Name : Brunei
+script.js:137 Capital : Bandar Seri Begawan
+script.js:138 Flag : �
+script.js:136 Name : Marshall Islands
+script.js:137 Capital : Majuro
+script.js:138 Flag : �
+script.js:145 Array(20)0: {name: {…}, tld: Array(1), cca2: 'TC', ccn3: '796', cca3: 'TCA', …}1: {name: {…}, tld: Array(1), cca2: 'EC', ccn3: '218', cca3: 'ECU', …}2: {name: {…}, tld: Array(1), cca2: 'VI', ccn3: '850', cca3: 'VIR', …}3: {name: {…}, tld: Array(1), cca2: 'MP', ccn3: '580', cca3: 'MNP', …}4: {name: {…}, tld: Array(1), cca2: 'PW', ccn3: '585', cca3: 'PLW', …}5: {name: {…}, tld: Array(1), cca2: 'KH', ccn3: '116', cca3: 'KHM', …}6: {name: {…}, tld: Array(1), cca2: 'GU', ccn3: '316', cca3: 'GUM', …}7: {name: {…}, tld: Array(1), cca2: 'SV', ccn3: '222', cca3: 'SLV', …}8: {name: {…}, tld: Array(1), cca2: 'PR', ccn3: '630', cca3: 'PRI', …}9: {name: {…}, tld: Array(1), cca2: 'VG', ccn3: '092', cca3: 'VGB', …}10: {name: {…}, tld: Array(1), cca2: 'TL', ccn3: '626', cca3: 'TLS', …}11: {name: {…}, tld: Array(1), cca2: 'FM', ccn3: '583', cca3: 'FSM', …}12: {name: {…}, tld: Array(1), cca2: 'UM', ccn3: '581', cca3: 'UMI', …}13: {name: {…}, tld: Array(1), cca2: 'AS', ccn3: '016', cca3: 'ASM', …}14: {name: {…}, tld: Array(1), cca2: 'IO', ccn3: '086', cca3: 'IOT', …}15: {name: {…}, tld: Array(1), cca2: 'PA', ccn3: '591', cca3: 'PAN', …}16: {name: {…}, tld: Array(2), cca2: 'BQ', ccn3: '535', cca3: 'BES', …}17: {name: {…}, tld: Array(1), cca2: 'BS', ccn3: '044', cca3: 'BHS', …}18: {name: {…}, tld: Array(1), cca2: 'US', ccn3: '840', cca3: 'USA', …}19: {name: {…}, tld: Array(1), cca2: 'MH', ccn3: '584', cca3: 'MHL', …}length: 20[[Prototype]]: Array(0)at: ƒ at()concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {copyWithin: true, entries: true, fill: true, find: true, findIndex: true, …}[[Prototype]]: Object
+script.js:153 total population 7798590363
+
+
+comments:  use fetch method get data from url
+    let data will be countries
+    then use filter method to get region in asian countries.	
+	again use filter to get less than 21 lakhs population.
+	
